@@ -147,5 +147,10 @@ from [production].[brands] b
 cross join [production].[categories] c
 order by b.brand_id, c.category_id
 
---TODO For every product from model year 2016 calculate average discount, if there were no orders with this product show 0 as average discount, filter only products with average discount more or equal 0 and less or equal 0.105581
+--TODO For every product from model year 2016 calculate average discount, 
+-- if there were no orders with this product show 0 as average discount, 
+-- filter only products with average discount more or equal 0 and less or equal 0.105581
 
+select [production].[products].product_id, ISNULL(AVG(discount), 0)  from production.products LEFT JOIN sales.order_items 
+on [products].product_id = [order_items].product_id
+HAVING (model_year = 2016 and (AVG(discount) > 0 and AVG(discount) <= 0.105581))

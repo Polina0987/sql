@@ -125,3 +125,11 @@ GO
 -- 1. Name starts from 'Sun' or include 'Girl' (even inside some specific word)
 -- 2. Price is less than 1000
 -- 3. From categories #3 or #6
+SELECT [product_id],
+       [product_name],
+       [brand_id],
+       [category_id],
+       [model_year],
+       [list_price]
+FROM [production].[products]
+WHERE (list_price < 1000 and (product_name like '%Girl%' or product_name like 'Sun%') AND (category_id = 3 OR category_id = 6))
